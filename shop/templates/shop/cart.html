@@ -1,0 +1,49 @@
+{% extends 'shop/base.html'%}
+{% block contents%}
+    
+        <div class="row">
+            <div class="col-md-9">
+                <h2>Your cart</h2>
+            </div>
+
+            <div class="col-md-3 bg-light text-right">
+                <a href="/checkout/">
+                    <button type="button" class="btn btn-dark my-2">Checkout and load bill</button>
+                </a>
+            </div>
+        </div>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Product ID</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for id,name in productsname.items%}
+          <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            {% for id1,quantity in productsquantity.items%}
+                {%if id == id1 %}
+                    <td>{{quantity}}</td>
+                {%endif%}
+            {%endfor%}
+            <td>
+            
+                <a href="/removefromcart/{{id}}">
+                    <button type="button" class="btn btn-outline-danger" name="{{id}}">Remove</button>
+                </a>
+                <a href="/viewproduct/{{id}}">
+                    <button type="button" class="btn btn-outline-primary mx-1" name="{{id}}">Update</button>
+                </a>
+            </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+      </table>
+
+     
+{% endblock%}

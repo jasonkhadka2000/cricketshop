@@ -1,0 +1,44 @@
+{%extends 'shop/base.html'%}
+{%block contents%}
+<h1>Your order history</h1>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Order id</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">status</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for order in orders%}
+      <tr>
+        <td>{{order.id}}</td>
+        <td>
+        {% for name in order.order_allorders.values%}
+            <table>
+                <td>{{name}}  </td>
+            </table>
+        {%endfor%}
+        </td> 
+        <td>
+          {% for quantity in order.order_allorders.keys%}
+              <table>
+                  <td>{{quantity}}</td>
+              </table>
+          {%endfor%}
+          </td> 
+        <td>
+            <button type="button" class="btn btn-outline-warning">{{order.order_track}}</button>
+            {%if order.order_track == 'onprocess'%}
+            <a href="/cancelorder/{{order.id}}">
+                <button type="button" class="btn btn-outline-danger">Cancel</button>
+            </a>
+            {%endif%}
+        </td>
+       
+    </tr>
+        {%endfor%}
+    </tbody>
+  </table>
+{%endblock%}

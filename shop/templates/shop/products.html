@@ -1,0 +1,37 @@
+{% extends 'shop/base.html'%}
+{% block contents%}
+<div class="row">
+    {% for product in Products %}   
+    
+        <div class="col-sm-4">
+        <div class="row my-2">     
+                <h2><b>{{product.pname.upper}}</b></h2>         
+        </div>
+        <div class="row">
+            <img src="{{product.pimage.url}}" width="180px" height="180px">
+        </div>
+        <div class="row">
+            <div class=col-sm-8>
+            <small>
+                Description: {{product.pdesc}}<br>
+                Price:{{product.pprice}}<br>
+                <br>
+            </small>
+            </div>
+            <div class="col-sm-4">
+                <!-- <a href="viewproduct/{{product.id}}/"> -->
+                    <a href="/viewproduct/{{product.id}}">
+                    <button type="submit" class="btn btn-success my-2">View product</button>
+                </a>
+            </div>
+            
+        </div>
+        </div>
+    
+    {%endfor%}
+</div>
+{% endblock%}
+
+
+
+    

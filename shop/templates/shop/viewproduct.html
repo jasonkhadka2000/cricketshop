@@ -1,0 +1,48 @@
+{% extends 'shop/base.html'%}
+{% block contents%}
+    {%for product in Products%}
+        <div class="row my-3">
+            <div class="col-sm-3">
+                <img src="{{product.pimage.url}}" width="180px" height="180px">
+            </div>
+            <div class="col-sm-5">
+                <h2>{{product.pname.upper}}</h2>
+                <small>
+                    Company: {{product.pcompany}}<br>
+                    Description: {{product.pdesc}}<br>
+                    Price: {{product.pprice}}<br>
+                    Colour: {{product.pcolour}}<br>
+                    Size: {{product.psize}}
+                </small>
+            </div>
+            <div class="col-sm-4">
+                <h4>Issue your order</h4>
+                
+                    <form action="/updatecart/{{product.id}}" onsubmit="return cartitem_validate()" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            
+                            <label for="quantity" class="form-label">Quantity</label>
+                            {% if product.id in productsquantity.keys%}
+                                <input type="number" class="form-control" id="quantity" placeholder="{{placeholder}}" min="1" name="quantity">
+                            {%else%}
+                                <input type="number" class="form-control" id="quantity" placeholder="1" min="1" name="quantity">
+                            {%endif%}
+                          </div>
+                          <div>
+                            {% if product.id in productsquantity.keys%}
+                                 <button type="submit" class="btn btn-primary">Update item</button>    
+                            {%else%}
+                                <button type="submit" class="btn btn-warning cart">Add to cart</button>
+                            {%endif%}
+                         </div>
+                    </form>
+            </div>
+        </div>
+        <div>
+            view other related is
+        </div>
+    {%endfor%}
+{% endblock%}
+<!--  -->
+
